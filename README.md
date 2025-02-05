@@ -33,8 +33,11 @@ const authMiddleware = createAuthMiddleware({
 app.use(authMiddleware);
 
 // Use the requireSession middleware cab be used to protect routes that require a valid session
-app.get('/protected', requireSession(), (req, res) => {
-	res.send('Hello World');
+app.get('/protected', requireSession(), (c) => {
+	// Session details are available on the context object
+	const session = c.get('session');
+
+	return c.text('Hello World');
 });
 ```
 
