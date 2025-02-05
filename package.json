@@ -1,0 +1,40 @@
+{
+	"name": "hono-zitadel-middleware",
+	"version": "0.0.1",
+	"author": "Abdelilah Sawab (https://github.com/abdelilah)",
+	"repository": "https://github.com/abdelilah/hono-zitadel-middleware",
+	"type": "module",
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc",
+		"ci": "npm run build && npm run check-format && npm run check-exports && npm run lint && npm run test",
+		"format": "prettier --write .",
+		"check-format": "prettier --check .",
+		"check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+		"test": "vitest run",
+		"local-release": "changeset version && changeset publish",
+		"prepublishOnly": "npm run ci"
+	},
+	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.17.3",
+		"@changesets/cli": "^2.27.12",
+		"@hono/node-server": "^1.13.8",
+		"@types/jsonwebtoken": "^9.0.8",
+		"@types/node": "^22.13.1",
+		"hono": "^4.6.20",
+		"prettier": "^3.4.2",
+		"tsx": "^4.19.2",
+		"typescript": "^5.0.0",
+		"vitest": "^3.0.4"
+	},
+	"peerDependencies": {
+		"hono": "^4.6.20"
+	},
+	"dependencies": {
+		"jsonwebtoken": "^9.0.2"
+	}
+}
