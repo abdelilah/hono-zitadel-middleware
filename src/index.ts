@@ -5,6 +5,7 @@ import {
 } from './lib/string-helpers.js';
 import { setCookie, getCookie, deleteCookie } from 'hono/cookie';
 import jwt from 'jsonwebtoken';
+import requireSession from './require-session.js';
 
 type JWTConfig = {
 	keyId: string;
@@ -23,7 +24,7 @@ interface AuthMiddlewareConfig {
 	errorRedirectUrl?: string;
 }
 
-export function createAuthMiddleware({
+function createAuthMiddleware({
 	authBaseUrl = '/auth',
 	oauthUrl,
 	clientId,
@@ -93,14 +94,15 @@ export function createAuthMiddleware({
 			}).then((res) => res.json());
 
 			if (tokenResponse.error) {
-				return context.redirect(`${errorRedirectUrl}?error=${tokenResponse.error}`);
+				return context.redirect(
+					`${errorRedirectUrl}?error=${tokenResponse.error}`,
+				);
 			}
 
 			// Store access_token and id_token in cookie
 			const cookieExpiresAt = new Date(
 				Date.now() + tokenResponse.expires_in * 1000,
 			);
-
 
 			// Update cookies
 			deleteCookie(context, 'state');
@@ -209,5 +211,7 @@ export function createAuthMiddleware({
 		await next();
 	});
 }
+
+export { createAuthMiddleware, requireSession };
 
 export default createAuthMiddleware;
