@@ -13,9 +13,9 @@ export function genRandomString(length: number): string {
 export function generateCodeChallenge(verifier: string): string {
 	const verifierBuffer = Buffer.from(verifier);
 	const hashed = createHash('sha256').update(verifierBuffer).digest();
-	return hashed.toString('base64')
+	return hashed
+		.toString('base64')
 		.replace(/=/g, '')
 		.replace(/\+/g, '-')
 		.replace(/\//g, '_');
 }
-
