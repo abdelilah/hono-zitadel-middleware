@@ -1,11 +1,8 @@
 import { createMiddleware } from 'hono/factory';
-import {
-	generateCodeChallenge,
-	genRandomString,
-} from './lib/string-helpers.js';
+import { generateCodeChallenge, genRandomString } from './lib/string-helpers';
 import { setCookie, getCookie, deleteCookie } from 'hono/cookie';
 import jwt from 'jsonwebtoken';
-import requireSession from './require-session.js';
+import requireSession from './require-session';
 
 type JWTConfig = {
 	keyId: string;

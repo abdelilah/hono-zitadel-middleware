@@ -14,13 +14,14 @@
 		"noUncheckedIndexedAccess": true,
 		"noImplicitOverride": true,
 		/* If transpiling with TypeScript: */
-		"module": "NodeNext",
+		"module": "Preserve",
 		"outDir": "dist",
 		"rootDir": "src",
 		"sourceMap": true,
 		/* AND if you're building for a library: */
 		"declaration": true,
 		/* AND if you're building for a library in a monorepo: */
+		"noEmit": true,
 		"declarationMap": true,
 		"baseUrl": "./src",
 		"paths": {

@@ -1,11 +1,10 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
-import { afterAll, beforeAll, expect, it, vi } from 'vitest';
-import createAuthMiddleware from './index.js';
-import requireSession from './require-session.js';
+import { beforeAll, expect, it } from 'vitest';
+import createAuthMiddleware from './index';
+import requireSession from './require-session';
 
 const SERVER_PORT = 3303;
-const OAUTH_PORT = 3304;
 const SERVER_URL = `http://localhost:${SERVER_PORT}`;
 const AUTH_CONFIG = {
 	oauthUrl: `http://localhost:${OAUTH_PORT}`,
@@ -26,16 +25,6 @@ app.get('/', (c) => {
 });
 app.get('/protected', requireSession(), (c) => {
 	return c.text('Super secret stuff');
-});
-
-// Mock OAuth server
-const oauthApp = new Hono();
-oauthApp.get('/oauth/v2/authorize', (c) => {
-	return c.redirect('/auth');
-});
-serve({
-	fetch: oauthApp.fetch,
-	port: OAUTH_PORT,
 });
 
 beforeAll(() => {
