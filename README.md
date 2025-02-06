@@ -5,7 +5,7 @@ A minimal authentication middleware for [Hono](https://hono.dev/) to authenticat
 ## Installation
 
 ```bash
-npm install @abdelilah/hono-zitadel-middleware
+npm install hono-zitadel-middleware
 ```
 
 ## Prerequisites
