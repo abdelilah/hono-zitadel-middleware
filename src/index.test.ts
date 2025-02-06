@@ -7,7 +7,7 @@ import requireSession from './require-session';
 const SERVER_PORT = 3303;
 const SERVER_URL = `http://localhost:${SERVER_PORT}`;
 const AUTH_CONFIG = {
-	oauthUrl: `http://localhost:${OAUTH_PORT}`,
+	oauthUrl: `http://localhost:1234`, // This is a fake URL
 	clientId: 'client-id',
 	jwtConfig: {
 		keyId: 'key-id',
