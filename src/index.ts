@@ -113,7 +113,12 @@ function createAuthMiddleware({
 			return context.redirect(successRedirectUrl);
 		}
 
-		const accessToken = getCookie(context, 'access_token');
+		let accessToken = getCookie(context, 'access_token');
+		// Use token from Bearer header if available
+		const authHeader = context.req.header('Authorization');
+		if (authHeader && authHeader.startsWith('Bearer ')) {
+			accessToken = authHeader.substring(7);
+		}
 
 		// Handle logout endpoint
 		const logoutUrl = new URL(`${authBaseUrl}/logout`, requestUrl.origin);
