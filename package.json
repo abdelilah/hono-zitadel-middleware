@@ -1,6 +1,6 @@
 {
 	"name": "hono-zitadel-middleware",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"author": "Abdelilah Sawab (https://github.com/abdelilah)",
 	"repository": "https://github.com/abdelilah/hono-zitadel-middleware",
 	"type": "module",
