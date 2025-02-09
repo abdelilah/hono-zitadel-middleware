@@ -23,8 +23,11 @@ app.use(createAuthMiddleware(AUTH_CONFIG));
 app.get('/', (c) => {
 	return c.text('Hello World');
 });
-app.get('/protected', requireSession(), (c) => {
+app.get('/protected', requireSession({ redirectTo: '/auth' }), (c) => {
 	return c.text('Super secret stuff');
+});
+app.get('/api', requireSession(), (c) => {
+	return c.text('API response');
 });
 
 beforeAll(() => {
@@ -67,4 +70,12 @@ it('/auth must set state and code verifier cookies and redirect to auth URL', as
 	expect(redirectUrl.pathname).toBe('/oauth/v2/authorize');
 	expect(headers.get('set-cookie')).toContain('state=');
 	expect(headers.get('set-cookie')).toContain('code_verifier=');
+});
+
+it('requireAuth() returns 401 if session is not present and no redirectUrl is provided', async () => {
+	const response = await fetch(`${SERVER_URL}/api`, {
+		redirect: 'manual',
+	});
+
+	expect(response.status).toBe(401);
 });
