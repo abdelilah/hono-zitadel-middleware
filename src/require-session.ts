@@ -14,7 +14,7 @@ export function requireSession(config?: RequireSessionConfig) {
 			if (redirectTo) {
 				return context.redirect(redirectTo);
 			}
-			
+
 			return context.text('Unauthorized', { status: 401 });
 		}
 
